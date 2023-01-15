@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-message" :id="message.id">
-    <svg height="120" width="205" class="wrapper-message__icon">
+    <svg :style="{color: message.color}" height="120" width="205" class="wrapper-message__icon">
       <use height="120" width="205" xlink:href="@/assets/images/icons.svg#user-demo"></use>
     </svg>
     <div class="wrapper-message__text">

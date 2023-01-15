@@ -3,8 +3,9 @@ import Main from "@/pages/Main";
 import User from "@/pages/User";
 import Screen from "@/pages/Screen";
 import UserRoom from "@/pages/UserRoom";
-import ScreenRoom from "@/pages/ScreenRoom";
 import ScreenRoomNew from "@/pages/ScreenRoomNew";
+import SettingsScreen from "@/pages/SettingsScreen";
+
 
 const routes = [
     {
@@ -26,6 +27,10 @@ const routes = [
     {
         path: '/screen/room',
         component: ScreenRoomNew
+    },
+    {
+        path: '/screen/settings',
+        component: SettingsScreen
     }
 ]
 

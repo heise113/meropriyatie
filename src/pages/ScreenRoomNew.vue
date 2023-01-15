@@ -1,16 +1,20 @@
 <template>
-  <transition-group name="fade">
-    <div class="wrapper-screen-room">
-      <div class="wrapper-screen-room__messages">
+  <div class="wrapper-screen-room">
+    <div class="wrapper-screen-room__messages">
+      <transition-group name="fade">
         <Message v-for="message in messages" :key="message.id" :message="message" :messages="messages"
           @deleteMessage="deleteMessage" />
-      </div>
+      </transition-group>
     </div>
-  </transition-group>
+  </div>
 </template>
 
 <script>
 import Message from "@/components/MessageNew";
+
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 export default {
   components: {
@@ -129,7 +133,7 @@ export default {
       this.messages.push({
         id: Math.floor(Math.random() * 100000),
         message: String(Math.floor(Math.random() * 100)),
-        color: 'red',
+        color: `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`,
         position: 'no'
       })
     }, 1000)
@@ -147,13 +151,51 @@ export default {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+// .fade-enter-active,
+// .fade-leave-active {
+//   transition: opacity 0.5s ease;
+// }
+
+// .fade-enter-from,
+// .fade-leave-to {
+//   opacity: 0;
+// }
+
+
+
+// .fade-enter-active {
+//   transition: all .3s ease-out;
+// }
+
+// .fade-leave-active {
+//   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// }
+
+// .fade-enter-from,
+// .fade-leave-to {
+//   transform: translateX(20px);
+//   opacity: 0;
+// }
+
+
+
+.fade-enter-active {
+  animation: fade-in .5s ease-out both;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.fade-leave-active {
+  animation: fade-in .5s reverse ease-in both;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

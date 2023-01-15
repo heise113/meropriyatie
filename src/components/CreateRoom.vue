@@ -41,7 +41,8 @@ export default {
       this.count ? --this.count : null
     },
     create() {
-      this.$emit('changeActive', 'login')
+      // this.$emit('changeActive', 'login')
+      this.$router.push({path: '/screen/settings'})
     }
   }
 }
