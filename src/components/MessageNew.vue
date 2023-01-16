@@ -46,7 +46,8 @@ export default {
             ||
             this.message.position.cor3 >= message.position.cor1 && this.message.position.cor3 <= message.position.cor3 && this.message.position.cor2 >= message.position.cor2 && this.message.position.cor2 <= message.position.cor4
             ||
-            this.message.position.cor3 >= message.position.cor1 && this.message.position.cor3 <= message.position.cor3 && this.message.position.cor4 >= message.position.cor2 && this.message.position.cor4 <= message.position.cor4) {
+            this.message.position.cor3 >= message.position.cor1 && this.message.position.cor3 <= message.position.cor3 && this.message.position.cor4 >= message.position.cor2 && this.message.position.cor4 <= message.position.cor4
+            ) {
             intersect = true
             console.log('ura')
           }

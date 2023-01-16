@@ -6,21 +6,30 @@
             </div>
             <div class="wrapper-settings__window__timer">
                 <div class="wrapper-settings__window__timer__text">Удаление сообщений через: {{ volume_value }}</div>
-                <input class="wrapper-settings__window__timer__volume" step="any" type="range" ref="volume" min="5" max="30">
+                <input class="wrapper-settings__window__timer__volume" v-model="volume_value" type="range" min="5" max="30">
             </div>
+            <button @click="startScreen" class="wrapper-settings__window__button">
+                Запустить экран
+            </button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            volume_value: null
+    data() {
+        return {
+            volume_value: 5
         }
     },
-    mounted(){
-        
+    methods: {
+        startScreen() {
+            this.$store.state.settings_screen.message_time = this.volume_value
+            this.$router.push({ path: '/screen/room' })
+        }
+    },
+    mounted() {
+      
     }
 }
 </script>
@@ -49,13 +58,32 @@ export default {
         }
 
         &__timer {
+            margin-bottom: 40px;
+
             &__text {
                 margin-bottom: 10px;
             }
 
             &__volume {
-                width: 200px;
+                width: 210px;
                 cursor: pointer;
+            }
+        }
+
+        &__button {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            padding: 20px 0;
+            text-align: center;
+            border: 2px solid aqua;
+            background-color: blueviolet;
+            border-radius: 20px;
+            cursor: pointer;
+            color: white;
+
+            &:active {
+                opacity: 0.7;
             }
         }
     }

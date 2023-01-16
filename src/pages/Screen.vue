@@ -9,6 +9,11 @@
           v-else-if="active.create_room"
           @changeActive="changeActive"
       />
+      <LoginPassword
+        v-else-if="active.login_pass"
+        @changeActive="changeActive"
+      />
+
     </transition>
   </div>
 </template>
@@ -17,18 +22,20 @@
 
 import LogIn from '@/components/LogIn'
 import CreateRoom from '@/components/CreateRoom'
-
+import LoginPassword from '@/components/Password.vue'
 
 export default {
   components: {
     LogIn,
+    LoginPassword,
     CreateRoom
   },
   data(){
     return {
       active: {
         login: true,
-        create_room: false
+        create_room: false,
+        login_pass: false
       }
     }
   },
@@ -36,11 +43,15 @@ export default {
     changeActive(active_component){
       this.active.login = false
       this.active.create_room = false
+      this.login_pass = false
       if (active_component == 'login'){
         this.active.login = true
       }
       else if (active_component == 'create_room'){
         this.active.create_room = true
+      }
+      else if (active_component == 'login_pass'){
+        this.active.login_pass = true
       }
     }
   }

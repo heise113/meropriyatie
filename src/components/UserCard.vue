@@ -1,18 +1,18 @@
 <template>
   <div class="user-card-mobile" v-if="width < 1024">
     <svg height="150" width="150">
-      <use height="150" width="150" xlink:href="@/assets/images/icons.svg#user"></use>
+      <use height="150" width="150" xlink:href="@/assets/images/icons.svg#chat"></use>
     </svg>
-    <span class="user-card-mobile__text">Пользователь</span>
+    <span class="user-card-mobile__text">Чат</span>
   </div>
 
   <!--  ---------------------------------------------- -->
 
   <div class="user-card-desktop" v-else>
     <svg class="user-card-desktop__user" height="150" width="150">
-      <use height="150" width="150" xlink:href="@/assets/images/icons.svg#user"></use>
+      <use height="150" width="150" xlink:href="@/assets/images/icons.svg#chat"></use>
     </svg>
-    <span class="user-card-desktop__text">Пользователь</span>
+    <span class="user-card-desktop__text">Чат</span>
   </div>
 </template>
 

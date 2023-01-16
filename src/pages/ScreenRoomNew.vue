@@ -6,6 +6,7 @@
           @deleteMessage="deleteMessage" />
       </transition-group>
     </div>
+    <img class="wrapper-screen-room__qr" src="../assets/images/qr-code.png">
   </div>
 </template>
 
@@ -125,7 +126,7 @@ export default {
             this.messages.splice(index, 1)
           }
         })
-      }, 10000)
+      }, this.$store.state.settings_screen.message_time * 1000)
     }
   },
   mounted() {
@@ -149,34 +150,16 @@ export default {
   &__messages {
     height: 100%;
   }
+
+  &__qr {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  
+    width: 250px;
+    height: 250px;
+  }
 }
-
-// .fade-enter-active,
-// .fade-leave-active {
-//   transition: opacity 0.5s ease;
-// }
-
-// .fade-enter-from,
-// .fade-leave-to {
-//   opacity: 0;
-// }
-
-
-
-// .fade-enter-active {
-//   transition: all .3s ease-out;
-// }
-
-// .fade-leave-active {
-//   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-// }
-
-// .fade-enter-from,
-// .fade-leave-to {
-//   transform: translateX(20px);
-//   opacity: 0;
-// }
-
 
 
 .fade-enter-active {

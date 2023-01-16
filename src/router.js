@@ -2,9 +2,10 @@ import {createRouter, createWebHistory} from "vue-router";
 import Main from "@/pages/Main";
 import User from "@/pages/User";
 import Screen from "@/pages/Screen";
+import Settings from "@/pages/Settings";
 import UserRoom from "@/pages/UserRoom";
 import ScreenRoomNew from "@/pages/ScreenRoomNew";
-import SettingsScreen from "@/pages/SettingsScreen";
+import SettingsRoom from "@/pages/SettingsScreen";
 
 
 const routes = [
@@ -21,6 +22,10 @@ const routes = [
         component: Screen
     },
     {
+        path: '/settings',
+        component: Settings
+    },
+    {
         path: '/user/room',
         component: UserRoom
     },
@@ -29,9 +34,9 @@ const routes = [
         component: ScreenRoomNew
     },
     {
-        path: '/screen/settings',
-        component: SettingsScreen
-    }
+        path: '/settings/room',
+        component: SettingsRoom
+    },
 ]
 
 const router = createRouter({

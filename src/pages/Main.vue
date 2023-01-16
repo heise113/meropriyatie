@@ -1,7 +1,8 @@
 <template>
   <div class="main-mobile" v-if="width < 1024">
-    <UserCard @click="$router.push({ path: 'user' })" />
-    <ScreenCard @click="$router.push({ path: 'screen' })" />
+    <UserCard @click="$router.push({ path: '/user' })" />
+    <ScreenCard @click="$router.push({ path: '/screen' })" />
+    <SettingsCard @click="$router.push({ path: '/settings' })"/>
   </div>
 
   <!-- ------------------------------------------------------------------- -->
@@ -9,17 +10,20 @@
   <div class="main-desktop" v-else>
     <UserCard @click="$router.push('/user')" />
     <ScreenCard @click="$router.push('/screen')" />
+    <SettingsCard @click="$router.push({ path: '/settings' })"/>
   </div>
 </template>
 
 <script>
 import UserCard from "@/components/UserCard";
 import ScreenCard from "@/components/ScreenCard";
+import SettingsCard from "@/components/SettignsCard.vue"
 
 export default {
   components: {
     UserCard,
     ScreenCard,
+    SettingsCard
   },
   data() {
     return {

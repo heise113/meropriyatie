@@ -10,7 +10,7 @@
     </div>
     <color-picker v-bind="color" @input="onInput"></color-picker>
     <div class="wrapper-chat__input">
-      <input maxlength="25" type="text" placeholder="Ваше сообщение..." v-model="message">
+      <input @keydown.enter="send" maxlength="25" type="text" placeholder="Ваше сообщение..." v-model="message">
       <svg @click="send" height="25" width="25" class="wrapper-chat__input__icon">
         <use height="25" width="25" xlink:href="@/assets/images/icons.svg#input-arrow"></use>
       </svg>
@@ -149,6 +149,12 @@ export default {
     left: 10px;
     cursor: pointer;
     color: white;
+    transition-duration: 0.3s;
+
+    &:hover {
+      transition-duration: 0.3s;
+      transform: scale(1.1);
+    }
   }
 }
 </style>
