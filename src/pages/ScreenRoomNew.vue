@@ -12,6 +12,7 @@
 
 <script>
 import Message from "@/components/MessageNew";
+import axios from "axios";
 
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -114,7 +115,9 @@ export default {
         //   color: 'red',
         //   position: 'no'
         // },
-      ]
+      ],
+      messages_store: [],
+      last_message_id: 0,
     }
   },
   methods: {
@@ -127,17 +130,39 @@ export default {
           }
         })
       }, this.$store.state.settings_screen.message_time * 1000)
+    },
+    ff() {
+      setInterval(async () => {
+        this.messages_store[this.messages_store.length - 1] ? this.last_message_id = this.messages_store[this.messages_store.length - 1].id : 0
+        await axios
+            .post('http://80.249.147.33/api/messages', {
+              id: this.last_message_id,
+              code: this.$store.state.user_login
+            })
+            .then(response => {
+                  this.messages_store = this.messages.concat(response.data)
+                  console.log(this.messages_store)
+                }
+            );
+      }, 3000)
     }
   },
   mounted() {
     setInterval(() => {
-      this.messages.push({
-        id: Math.floor(Math.random() * 100000),
-        message: String(Math.floor(Math.random() * 100)),
-        color: `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`,
-        position: 'no'
-      })
+      // this.messages_store.push({
+      //   id: Math.floor(Math.random() * 100000),
+      //   message: String(Math.floor(Math.random() * 100)),
+      //   color: `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`,
+      //   position: 'no'
+      // })
+
+      if (this.messages.length <= 15 && this.messages_store.length !==0) {
+        this.messages.push(this.messages_store.pop())
+      }
     }, 1000)
+
+    if(this.$route.fullPath === '/screen/room')
+      this.ff()
   }
 }
 </script>
@@ -155,7 +180,7 @@ export default {
     position: absolute;
     bottom: 20px;
     left: 20px;
-  
+
     width: 250px;
     height: 250px;
   }
@@ -174,9 +199,11 @@ export default {
   0% {
     transform: scale(0);
   }
+
   50% {
     transform: scale(1.25);
   }
+
   100% {
     transform: scale(1);
   }

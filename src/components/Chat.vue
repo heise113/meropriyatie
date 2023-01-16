@@ -10,7 +10,7 @@
     </div>
     <color-picker v-bind="color" @input="onInput"></color-picker>
     <div class="wrapper-chat__input">
-      <input @keydown.enter="send" maxlength="25" type="text" placeholder="Ваше сообщение..." v-model="message">
+      <input @keydown.enter="send" maxlength="55" type="text" placeholder="Ваше сообщение..." v-model="message">
       <svg @click="send" height="25" width="25" class="wrapper-chat__input__icon">
         <use height="25" width="25" xlink:href="@/assets/images/icons.svg#input-arrow"></use>
       </svg>
@@ -71,7 +71,8 @@ export default {
       await axios
           .post("http://80.249.147.33/api/send/message", {
             message: this.message,
-            color: this.hslToHex(this.color.hue, this.color.saturation, this.color.luminosity)
+            color: this.hslToHex(this.color.hue, this.color.saturation, this.color.luminosity),
+            code: this.$store.state.login
           })
           .then((response) => {
             console.log('register good')

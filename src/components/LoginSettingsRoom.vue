@@ -7,12 +7,12 @@
             <div class="wrapper-login__window__text">
                 Введите id комнаты
             </div>
-            <input type="text" class="wrapper-login__window__input">
+            <input v-model="input_name" type="text" class="wrapper-login__window__input">
             <div class="wrapper-login__window__text">
                 Введите пароль администратора
             </div>
-            <input type="text" class="wrapper-login__window__input">
-            <button class="wrapper-login__window__button">
+            <input v-model="input_pass" type="text" class="wrapper-login__window__input">
+            <button class="wrapper-login__window__button" @click="login">
                 Войти
             </button>
             <div class="wrapper-login__window__create" @click="$emit('changeActive', 'create_room')">
@@ -28,6 +28,7 @@
 
 <script>
 import { useRoute } from 'vue-router';
+import axios from "axios";
 
 export default {
     data() {
@@ -41,37 +42,21 @@ export default {
         }
     },
     methods: {
-        up() {
-            this.count++
-        },
-        down() {
-            this.count ? --this.count : null
-        },
-        create() {
-            if (this.input_name !== '' || this.input_pass !== '') {
-                this.$router.push({ path: '/screen/settings' })
-            }
-            else if (this.input_name === '' && this.input_pass === '') {
-                this.validate_empty_name = true
-                this.validate_empty_pass = true
-                setTimeout(() => {
-                    this.validate_empty_pass = false
-                    this.validate_empty_name = false
-                }, 3000)
-            }
-            else if (this.validate_empty_name === '') {
-                this.validate_empty_name = true
-                setTimeout(() => {
-                    this.validate_empty_name = false
-                }, 3000)
-            }
-            else if (this.validate_empty_pass === '') {
-                this.validate_empty_pass = true
-                setTimeout(() => {
-                    this.validate_empty_pass = false
-                }, 3000)
-            }
-
+        async login(){
+            await axios
+                    .post("http://80.249.147.33/api/join/room/setting", {
+                        code: this.input_name,
+                        password: this.input_pass
+                    })
+                    .then((response) => {
+                        console.log(response)
+                        this.$router.push({ path: '/settings/room' })
+                        if (response.data.data === 'wrongPassword'){
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
         }
     }
 }

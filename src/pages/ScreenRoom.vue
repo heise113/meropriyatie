@@ -113,7 +113,8 @@ export default {
         this.messages[this.messages.length - 1] ? this.last_message_id = this.messages[this.messages.length - 1].id : 0
         await axios
             .post('http://80.249.147.33/api/messages', {
-              id: this.last_message_id
+              id: this.last_message_id,
+              code: this.$store.state.user_login
             })
             .then(response => {
                   this.messages = this.messages.concat(response.data)

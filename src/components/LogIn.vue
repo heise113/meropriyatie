@@ -13,12 +13,12 @@
     <div class="log-in-wrapper__validate-error" v-if="validate_empty_room">
       введите id комнаты
     </div>
-    <button class="log-in-wrapper__button" v-if="route.path == '/user'" @click="validateUser">
+    <button class="log-in-wrapper__button" @click="validateUser">
       Далее
     </button>
-    <button class="log-in-wrapper__button" v-if="route.path == '/screen'" @click="validateScreen">
+    <!-- <button class="log-in-wrapper__button" v-if="route.path == '/screen'" @click="validateScreen">
       Далее
-    </button>
+    </button> -->
     <div class="log-in-wrapper__home" @click="$router.push({ path: '/' })">
       На главную
     </div>
@@ -76,6 +76,15 @@ export default {
           .then((response) => {
             console.log('register good')
             console.log(response)
+
+            if(response.data.success && this.$route.path == '/user'){
+              this.$store.state.user_login = this.input_room
+              this.$router.push({ path: '/user/room' })
+            }
+            if(response.data.success && this.$route.path == '/screen'){
+              this.$store.state.user_login = this.input_room
+              this.$router.push({ path: '/screen/room' })
+            }
 
             if (response.data.data === 'code') {
               this.validate_room = true

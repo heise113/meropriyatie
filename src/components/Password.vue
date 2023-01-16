@@ -6,12 +6,12 @@
         <input type="password" v-model="input_pass" class="log-in-pass-wrapper__input">
         <div v-if="validate_pass" class="log-in-pass-wrapper__validate">Невырный пароль</div>
         <div v-if="validate_empty" class="log-in-pass-wrapper__validate">Введите пароль</div>
-        <button v-if="route.path == '/user'" @click="goChat" class="log-in-pass-wrapper__button">
+        <button @click="goChat" class="log-in-pass-wrapper__button">
             Войти
         </button>
-        <button v-if="route.path == '/screen'" @click="goScreen" class="log-in-pass-wrapper__button">
+        <!-- <button v-if="route.path == '/screen'" @click="goScreen" class="log-in-pass-wrapper__button">
             Войти
-        </button>
+        </button> -->
         <div @click="goHome" class="log-in-pass-wrapper__home">
             На главную
         </div>
@@ -42,7 +42,7 @@ export default {
                 this.validate_empty = false
                 await axios
                     .post("http://80.249.147.33/api/join/room", {
-                        code: this.$store.state.login,
+                        code: this.$store.state.user_login,
                         password: this.input_pass
                     })
                     .then((response) => {
@@ -57,7 +57,14 @@ export default {
                         console.log(error)
                     })
                 if (!this.validate_pass){
-                    this.$router.push('/user/room/')
+                    if (this.$route.path == '/screen'){
+                        this.$router.push('/screen/room/')
+                        // console.log('+')
+                    }
+                    else if(this.$route.path == '/user'){
+                        this.$router.push('/user/room/')
+                        // console.log('-') 
+                    }
                 }
             }
             else {

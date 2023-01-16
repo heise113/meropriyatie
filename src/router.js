@@ -4,7 +4,7 @@ import User from "@/pages/User";
 import Screen from "@/pages/Screen";
 import Settings from "@/pages/Settings";
 import UserRoom from "@/pages/UserRoom";
-import ScreenRoomNew from "@/pages/ScreenRoomNew";
+import ScreenRoom from "@/pages/ScreenRoom";
 import SettingsRoom from "@/pages/SettingsScreen";
 
 
@@ -31,7 +31,7 @@ const routes = [
     },
     {
         path: '/screen/room',
-        component: ScreenRoomNew
+        component: ScreenRoom
     },
     {
         path: '/settings/room',
